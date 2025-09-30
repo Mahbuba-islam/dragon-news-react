@@ -1,8 +1,9 @@
 
 import { FaShareAlt, FaRegBookmark, FaEye, FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const NewsCard = ({ news }) => {
-  const { title, rating, author, total_view, thumbnail_url, details } = news;
+  const { title, rating, author, total_view, thumbnail_url, details,id } = news;
   const { name, published_date, img } = author;
   const { number, badge } = rating;
 
@@ -40,9 +41,12 @@ const NewsCard = ({ news }) => {
         <p className="text-sm text-gray-700">
           {details?.slice(0, 120)}...
         </p>
-        <button className="text-sm text-white bg-orange-500 px-4 py-1 rounded hover:bg-orange-600 transition">
+        <Link to={`/categoryDetails/${id}`}>
+          <button  className="text-sm text-white bg-orange-500 px-4 py-1 rounded hover:bg-orange-600 transition">
           Read More
         </button>
+        </Link>
+      
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 text-xs text-gray-600">
@@ -54,8 +58,11 @@ const NewsCard = ({ news }) => {
 
       {/* Footer: Rating + Views */}
       <div className="px-5 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-600">
+       
         <div className="flex items-center gap-2">
-          <FaStar className="text-orange-400" />
+          {
+          Array.from({length:rating.number}).map((_,i)=> ( <FaStar key={i} className="text-orange-400" />))
+        }
           <span className="font-semibold">{number}</span>
           <span>({badge})</span>
         </div>

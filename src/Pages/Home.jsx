@@ -1,8 +1,10 @@
+import { Navigate } from "react-router-dom";
 
 const Home = () => {
     return (
         <div>
-            <h1 className="font-semibold">Dragon News Home</h1>
+            <Navigate to='/category/1'/>
+           
         </div>
     );
 };
