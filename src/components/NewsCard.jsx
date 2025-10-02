@@ -1,4 +1,5 @@
 
+import { format } from "date-fns";
 import { FaShareAlt, FaRegBookmark, FaEye, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -6,6 +7,8 @@ const NewsCard = ({ news }) => {
   const { title, rating, author, total_view, thumbnail_url, details,id } = news;
   const { name, published_date, img } = author;
   const { number, badge } = rating;
+  
+  const formattedDate = format(new Date(published_date), 'MM-dd-yy')
 
   return (
     <div className="max-w-xl mx-auto bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
@@ -15,7 +18,7 @@ const NewsCard = ({ news }) => {
           <img src={img} alt={name} className="w-9 h-9 rounded-full object-cover" />
           <div>
             <p className="font-semibold text-gray-800">{name}</p>
-            <p className="text-xs text-gray-500">{published_date}</p>
+            <p className="text-xs text-gray-500">{formattedDate}</p>
           </div>
         </div>
         <div className="flex gap-3 text-gray-500 text-lg">
@@ -41,8 +44,8 @@ const NewsCard = ({ news }) => {
         <p className="text-sm text-gray-700">
           {details?.slice(0, 120)}...
         </p>
-        <Link to={`/categoryDetails/${id}`}>
-          <button  className="text-sm text-white bg-orange-500 px-4 py-1 rounded hover:bg-orange-600 transition">
+        <Link  to={`/categoryDetails/${id}`}>
+          <button  className="mb-6 text-sm text-white bg-orange-500 px-4 py-1 rounded hover:bg-orange-600 transition">
           Read More
         </button>
         </Link>
