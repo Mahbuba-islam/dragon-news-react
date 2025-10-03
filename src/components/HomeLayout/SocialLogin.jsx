@@ -1,11 +1,24 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaGithub, FaInstagramSquare, FaTwitter } from "react-icons/fa";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../Firebase/firebase.init";
 const SocialLogin = () => {
+    const provider = new GoogleAuthProvider()
+    const handleSignIn = () => {
+    console.log('email')
+    signInWithPopup(auth, provider)
+    .then(result => {
+    console.log(result)
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    }
     return (
         <div>
             <h2 className="font-bold mb-5 text-xl mt-4">Login with</h2>
             <div className="space-y-5 grid grid-cols-1">
-                <button className="btn"> <FcGoogle size={22} /> Login with google</button>
+                <button onClick={handleSignIn} className="btn"> <FcGoogle size={22} /> Login with google</button>
                 <button className="btn"> <FaGithub size={22}  /> Login with github</button>
             </div>
             <div>
