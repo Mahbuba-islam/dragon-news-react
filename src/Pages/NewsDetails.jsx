@@ -1,19 +1,19 @@
 import { FaStar } from "react-icons/fa";
-import { Navigate, useLoaderData, useParams } from "react-router-dom";
+import { Link, Navigate, useLoaderData, useParams } from "react-router-dom";
 import Header from '../components/Header/Header'
 import RightAside from '../components/HomeLayout/RightAside'
+
 const NewsDetails = () => {
   const { id } = useParams();
   const data = useLoaderData();
   const newsDetails = data.find(news => news.id == id);
-  const user = null
-  const { title, rating, author, total_view, thumbnail_url, details } = newsDetails;
+   const { title, rating, author, total_view, thumbnail_url, details } = newsDetails;
   const { name, published_date, img } = author;
   const { number, badge } = rating;
 
   return (
     <div>
-      {user ? 
+    
      
       <><Header></Header><div className=" flex gap-12 max-w-5xl mx-auto justify-center my-16">
 
@@ -42,15 +42,13 @@ const NewsDetails = () => {
               </div>
 
               <p className="text-gray-700 leading-relaxed">{details}</p>
+              <button className="btn btn-secondary"><Link to='/'>Back To Category</Link></button>
             </div>
           </div>
           <RightAside></RightAside>
         </div></>
      
-   : 
-    <Navigate to='/login'></Navigate>
-   
-      }
+ 
       
     </div>
     

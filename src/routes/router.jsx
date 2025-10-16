@@ -2,9 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import Home from "../Pages/Home";
 import CategoryNews from "../Pages/CategoryNews";
-import CategoryDetails from "../Pages/CategoryDetails";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import AuthLayout from "../layouts/AuthLayout";
+import NewsDetails from "../Pages/NewsDetails";
+import PrivateRoute from "../provider/PrivateRoute";
+ import Loading from "../Pages/Loading";
 
 const router = createBrowserRouter(
     [
@@ -19,7 +22,8 @@ const router = createBrowserRouter(
                 {
                     path:'/category/:id',
                     element:<CategoryNews></CategoryNews>,
-                    loader:()=> fetch('/news.json')
+                    loader:()=> fetch('/news.json'),
+                     hydrateFallbackElement:<Loading></Loading>
                 }
             ]
 
@@ -28,27 +32,32 @@ const router = createBrowserRouter(
             path:'/news',
             element:<h2>news</h2>
         },
-        {
-            path:'/',
-            element:<h2>home</h2>
-        },
+      
         {
             path:'/*',
             element:<h2>error</h2>
         },
         {
             path:'/categoryDetails/:id',
-            element:<CategoryDetails></CategoryDetails>,
-            loader:()=> fetch('/news.json')
+            element:<PrivateRoute><NewsDetails></NewsDetails></PrivateRoute>,
+            loader:()=> fetch('/news.json'),
+             hydrateFallbackElement:<Loading></Loading>
         },
         {
-        path:'/login',
-        element:<Login></Login>
+            path:'/auth',
+            element:<AuthLayout></AuthLayout>,
+            children:[
+            {
+           path:'/auth/login',
+           element:<Login></Login>
         },
         {
-            path:'/register',
+            path:'/auth/register',
             element:<Register></Register>
         }
+            ]
+        },
+        
     ]
 )
 

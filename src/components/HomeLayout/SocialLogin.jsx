@@ -1,48 +1,16 @@
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
 import { FaFacebook, FaGithub, FaInstagramSquare, FaTwitter } from "react-icons/fa";
-import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../Firebase/firebase.init";
 
 const SocialLogin = () => {
-     const googleProvider = new GoogleAuthProvider()
-      const githubProvider = new GithubAuthProvider()
+     
 
-const [user, setUser] = useState(null)
-
-const handleSignIn = () => {
-   
- signInWithPopup(auth, googleProvider)
- .then(result => {
-    console.log(result.user)
-  setUser(result.user)
- })
- .catch(error => {
-  console.log(error)
- })
-}
-
-
-// handleGithubSignIn
-
-const handleGithubSignIn = () => {
-  
-    signInWithPopup(auth,githubProvider) 
-    .then(result => {
-        console.log(result.user)
-        setUser(result.user)
-    })
-  .catch(error => {
-    console.log(error)
-  })
-}
    
     return (
         <div>
             <h2 className="font-bold mb-5 text-xl mt-4">Login with</h2>
             <div className="space-y-5 grid grid-cols-1">
-                <button onClick={handleSignIn} className="btn"> <FcGoogle size={22} /> Login with google</button>
-                <button onClick={handleGithubSignIn} className="btn"> <FaGithub size={22}  /> Login with github</button>
+                <button  className="btn"> <FcGoogle size={22} /> Login with google</button>
+                <button  className="btn"> <FaGithub size={22}  /> Login with github</button>
             </div>
             <div>
                
