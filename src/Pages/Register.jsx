@@ -11,7 +11,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
        e.preventDefault()
-    console.log(e.target.name.value)
+    // console.log(e.target.name.value)
     const name = e.target.name.value 
     if(name.length<5){
       setNameError('name should be more than 5 character')
