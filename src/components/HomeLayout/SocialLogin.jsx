@@ -4,7 +4,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { use } from "react";
 
 const SocialLogin = () => {
-     const {googleSignIn,setUser} = use(AuthContext)
+     const {googleSignIn,setUser, githubSignIn } = use(AuthContext)
     const handleGoogleSignIn = () => {
         googleSignIn()
          .then(result => {
@@ -20,13 +20,24 @@ const SocialLogin = () => {
 
     }
    
-   
+    // github signin
+    const handleGitHubSignIn = () => {
+        githubSignIn()
+     .then((result) => {
+      setUser(result.user)
+    })
+    .catch((error) => {
+    // Handle Errors here.
+    const errorMessage = error.message;
+    console.log(errorMessage)
+})
+}
     return (
         <div>
             <h2 className="font-bold mb-5 text-xl mt-4">Login with</h2>
             <div className="space-y-5 grid grid-cols-1">
                 <button onClick={handleGoogleSignIn} className="btn"> <FcGoogle size={22} /> Login with google</button>
-                <button  className="btn"> <FaGithub size={22}  /> Login with github</button>
+                <button onClick={handleGitHubSignIn} className="btn"> <FaGithub size={22}  /> Login with github</button>
             </div>
             <div>
                

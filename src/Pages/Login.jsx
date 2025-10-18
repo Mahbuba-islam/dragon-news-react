@@ -1,14 +1,16 @@
 
-import { use, useState } from "react";
+import { use, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 const Login = () => {
   const [error, setError] = useState('')
   const location = useLocation()
+  const emailRef = useRef()
   // console.log(location)
   const navigate = useNavigate()
-  const {signIn,setUser} = use(AuthContext)
+  const {signIn,setUser, auth} = use(AuthContext)
   const handleLogin = (e) => {
     e.preventDefault()
     const form = e.target
@@ -17,9 +19,14 @@ const Login = () => {
   
     signIn(email,password)
     .then(result => {
+    if(!result.user.emailVerified)
+      alert('please verify your email address')
     // Signed in 
-    setUser(result.user)
-    // console.log(user)
+    else{
+     setUser(result.user)
+    } 
+    console.log(result)
+    
     navigate(`${location.state ? location.state : '/'}`)
   })
   .catch((error) => {
@@ -27,6 +34,18 @@ const Login = () => {
     setError(errorMessage)
   });
 
+  }
+
+  // handleForgetPassword
+  const handleForgetPassword = () => {
+   const email = emailRef.current.value
+   sendPasswordResetEmail(auth, email)
+   .then(() => {
+    alert('A password reset email is sent. please chack your email')
+   })
+   .catch((error) => {
+    console.log(error)
+   })
   }
     return (
         <div>
@@ -39,10 +58,10 @@ const Login = () => {
       <div className="card-body">
         <form className="fieldset" onSubmit={handleLogin}>
           <label className="label">Email</label>
-          <input type="email" name="email" className="input" placeholder="Email" required/>
+          <input type="email" ref={emailRef} name="email" className="input" placeholder="Email" required/>
           <label className="label">Password</label>
           <input type="password" className="input" name="password" placeholder="Password" required/>
-          <div><a className="link link-hover">Forgot password?</a></div>
+          <div onClick={handleForgetPassword}><a className="link link-hover">Forgot password?</a></div>
 
           {
             error && <p className="text-red-600 text-xs">{error}</p>

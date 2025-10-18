@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { use, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { sendEmailVerification } from "firebase/auth";
 // import { useState } from "react";
 const Register = () => {
   const [nameError, setNameError] = useState('')
   const navigate = useNavigate()
-  const {createUser, setUser, updateUserProfile} = use(AuthContext)
+  const {createUser, setUser, updateUserProfile, auth} = use(AuthContext)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
 
@@ -33,7 +34,14 @@ const Register = () => {
       const user = result.user
       updateUserProfile({displayName : name, photoURL:photo})
       .then(()=> {
-        setUser({...user, displayName, photoURL})
+      
+        sendEmailVerification(result.user)
+       .then(() => {
+    console.log(' Email verification sent!')
+      setUser({...user, displayName, photoURL})
+    // ...
+  });
+
       })
       .catch((error)=> {
       console.log(error)
