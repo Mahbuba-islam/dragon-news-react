@@ -3,6 +3,7 @@ import { use, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { sendPasswordResetEmail } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [error, setError] = useState('')
@@ -20,13 +21,13 @@ const Login = () => {
     signIn(email,password)
     .then(result => {
     if(!result.user.emailVerified)
-      alert('please verify your email address')
+      toast.info("Please verify your email to activate your account.");
+
     // Signed in 
     else{
      setUser(result.user)
     } 
-    console.log(result)
-    
+   
     navigate(`${location.state ? location.state : '/'}`)
   })
   .catch((error) => {
@@ -41,7 +42,8 @@ const Login = () => {
    const email = emailRef.current.value
    sendPasswordResetEmail(auth, email)
    .then(() => {
-    alert('A password reset email is sent. please chack your email')
+   toast.success("Password reset email sent! Please check your inbox.");
+
    })
    .catch((error) => {
     console.log(error)

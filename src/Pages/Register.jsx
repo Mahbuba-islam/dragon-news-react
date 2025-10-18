@@ -2,11 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { use, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { sendEmailVerification } from "firebase/auth";
+import { toast } from "react-toastify";
 // import { useState } from "react";
 const Register = () => {
   const [nameError, setNameError] = useState('')
   const navigate = useNavigate()
-  const {createUser, setUser, updateUserProfile, auth} = use(AuthContext)
+  const {createUser, setUser, updateUserProfile} = use(AuthContext)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
 
@@ -27,18 +28,17 @@ const Register = () => {
     const password = e.target.password.value
     const phoneNumber = e.target.phoneNumber.value
     const photo = e.target.photo.value
-
+    
     // create user
     createUser(email,password)
     .then(result => {
       const user = result.user
-      updateUserProfile({displayName : name, photoURL:photo})
+      updateUserProfile({displayName : name, photoURL:photo, phoneNumber})
       .then(()=> {
-      
-        sendEmailVerification(result.user)
+      sendEmailVerification(result.user)
        .then(() => {
-    console.log(' Email verification sent!')
-      setUser({...user, displayName, photoURL})
+    toast.success("Verification email sent! Please check your inbox.");
+   setUser({...user, displayName, photoURL})
     // ...
   });
 
