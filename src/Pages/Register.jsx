@@ -28,7 +28,13 @@ const Register = () => {
     const password = e.target.password.value
     const phoneNumber = e.target.phoneNumber.value
     const photo = e.target.photo.value
-    
+    //  empty value 
+    e.target.email.value = ''
+    e.target.password.value=''
+    e.target.phoneNumber.value=''
+    e.target.photo.value=''
+    e.target.name.value = ''
+
     // create user
     createUser(email,password)
     .then(result => {
@@ -44,14 +50,16 @@ const Register = () => {
 
       })
       .catch((error)=> {
-      console.log(error)
+      setError(error)
       setUser(user)
     })
-      
-       navigate('/')
+       setTimeout(()=> {
+        navigate('/')
+       },4000)
+     
     })
     .catch((error)=> {
-      console.log(error)
+      setError(error.message)
     })
 
     

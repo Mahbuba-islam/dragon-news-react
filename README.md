@@ -5,7 +5,7 @@
 
 ## 🔥 Live Demo
 
-[Visit Dragon News](https://dragon-news-react-4f311.web.appm)
+[Visit Dragon News](https://dragon-news-react-4f311.web.app/category/1)
 
 ---
 

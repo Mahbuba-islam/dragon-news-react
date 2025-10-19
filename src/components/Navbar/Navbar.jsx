@@ -31,7 +31,7 @@ const Navbar = () => {
   <div className="flex items-center gap-5 mt-4 md:mt-0">
     {user && (
       <div className="w-10 h-10 rounded-full border-2 border-pink-500 bg-secondary text-white font-bold flex justify-center items-center text-lg">
-        {user?.displayName.slice(0, 1).toUpperCase()}
+        {user?.displayName?.slice(0, 1).toUpperCase()}
       </div>
     )}
     {user ? (

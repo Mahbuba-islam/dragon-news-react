@@ -12,12 +12,14 @@ const Login = () => {
   // console.log(location)
   const navigate = useNavigate()
   const {signIn,setUser, auth} = use(AuthContext)
+  // handle sign in
   const handleLogin = (e) => {
     e.preventDefault()
     const form = e.target
     const email = form.email.value
     const password = form.password.value
-  
+     form.email.value=''
+     form.password.value=''
     signIn(email,password)
     .then(result => {
     if(!result.user.emailVerified)
@@ -27,8 +29,11 @@ const Login = () => {
     else{
      setUser(result.user)
     } 
-   
-    navigate(`${location.state ? location.state : '/'}`)
+    
+    setTimeout(()=> {
+     navigate(`${location.state ? location.state : '/'}`)
+    },4000)
+  
   })
   .catch((error) => {
    const errorMessage = error.message;
