@@ -22,9 +22,9 @@ const Navbar = () => {
        <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-4 py-2">
   {/* Navigation Links */}
   <div className="space-x-4 text-accent md:mx-auto flex justify-center">
-    <NavLink className="btn bg-base-100 border-0 hover:bg-base-200 font-semibold text-accent">Home</NavLink>
-    <NavLink className="btn bg-base-100 border-0 hover:bg-base-200 font-semibold text-accent">About</NavLink>
-    <NavLink className="btn bg-base-100 border-0 hover:bg-base-200 font-semibold text-accent">Career</NavLink>
+    <NavLink to='/' className="btn bg-base-100 border-0 hover:bg-base-200 font-semibold text-accent">Home</NavLink>
+    <NavLink to='/about' className="btn bg-base-100 border-0 hover:bg-base-200 font-semibold text-accent">About</NavLink>
+    <NavLink to='/Career' className="btn bg-base-100 border-0 hover:bg-base-200 font-semibold text-accent">Career</NavLink>
   </div>
 
   {/* User Info + Auth Buttons */}

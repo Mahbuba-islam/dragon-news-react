@@ -33,11 +33,11 @@ const SocialLogin = () => {
 })
 }
     return (
-        <div>
+        <div className="px-4">
             <h2 className="font-bold mb-5 text-xl mt-4">Login with</h2>
             <div className="space-y-5 grid grid-cols-1">
-                <button onClick={handleGoogleSignIn} className="btn"> <FcGoogle size={22} /> Login with google</button>
-                <button onClick={handleGitHubSignIn} className="btn"> <FaGithub size={22}  /> Login with github</button>
+                <button onClick={handleGoogleSignIn} className="btn text-xs"> <FcGoogle size={25} /> Login with google</button>
+                <button onClick={handleGitHubSignIn} className="btn text-xs"> <FaGithub size={22}  /> Login with github</button>
             </div>
             <div>
                

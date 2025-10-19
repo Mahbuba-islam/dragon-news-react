@@ -8,6 +8,8 @@ import AuthLayout from "../layouts/AuthLayout";
 import NewsDetails from "../Pages/NewsDetails";
 import PrivateRoute from "../provider/PrivateRoute";
  import Loading from "../Pages/Loading";
+import About from "../Pages/About";
+import Career from "../Pages/Career";
 
 const router = createBrowserRouter(
     [
@@ -56,9 +58,22 @@ const router = createBrowserRouter(
             element:<Register></Register>
         }
             ]
+            
         },
+
+      {
+        path: '/about',
+        element:<About></About>
+
+      } ,
+      {
+        path:'/Career',
+        element:<Career></Career>
+      }
         
     ]
+      
+       
 )
 
 export default router;

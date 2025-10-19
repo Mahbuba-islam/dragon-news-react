@@ -11,7 +11,21 @@ createRoot(document.getElementById('root')).render(
    <AuthProvider>
     <RouterProvider router={router}>
      </RouterProvider>
-      <ToastContainer/>
+      <ToastContainer
+       position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        className="text-sm font-medium z-50"
+        toastClassName="bg-white text-gray-800 shadow-md rounded px-4 py-3"
+        bodyClassName="text-base"
+/>
    </AuthProvider>
       </StrictMode>,
 )
